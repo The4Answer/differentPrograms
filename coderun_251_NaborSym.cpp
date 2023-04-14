@@ -25,6 +25,9 @@ int main() {
 	cin >> s;
 	string c;
 	cin >> c;
+	set<char> checker;
+	for (int i = 0; i < c.size(); ++i) 
+		checker.insert(c[i]);
 
 	int minL = 1000000;
 	for (int i = 0; i < s.size(); ++i) { //O(262600)O(n*n*m)
@@ -33,13 +36,9 @@ int main() {
 		for (int j = i; j < s.size(); ++j) {
 			cur++;
 			used.insert(s[j]);
-			bool isGood = true;
-			for (int k = 0; k < c.size(); ++k) {
-				if (used.find(c[k]) == used.end()) 
-					isGood = false;
-			}
-			if (isGood) {
+			if (used == checker) {
 				minL = min(minL, cur);
+				break;
 			}
 		}
 	}
